@@ -1,0 +1,424 @@
+{
+  "schema_version": "1.3.0",
+  "summary": {
+    "total_findings": 8,
+    "by_provider": {
+      "aws": 8
+    },
+    "by_risk": {
+      "low": 6,
+      "medium": 2
+    },
+    "by_confidence": {
+      "medium": 6,
+      "high": 2
+    },
+    "scanned_at": "2026-09-06T07:41:41.750565+00:00",
+    "regions_scanned": [
+      "ap-south-1",
+      "us-east-1"
+    ],
+    "provider": "aws",
+    "region_selection_mode": "all-regions",
+    "total_rules": 15,
+    "rules_evaluated": {
+      "aws.cloudwatch.logs.infinite_retention": 0,
+      "aws.ebs.snapshot.old": 0,
+      "aws.ebs.unattached": 0,
+      "aws.ec2.ami.old": 0,
+      "aws.ec2.elastic_ip.unattached": 0,
+      "aws.ec2.eni.detached": 0,
+      "aws.ec2.instance.stopped": 0,
+      "aws.ec2.nat_gateway.idle": 0,
+      "aws.ec2.security_group.unused": 6,
+      "aws.elb.clb.idle": 0,
+      "aws.opensearch.domain.idle": 0,
+      "aws.rds.instance.idle": 0,
+      "aws.rds.snapshot.old": 0,
+      "aws.redshift.cluster.idle": 0,
+      "aws.resource.untagged": 2
+    },
+    "highest_confidence": "high",
+    "high_conf_findings": 2
+  },
+  "findings": [
+    {
+      "provider": "aws",
+      "rule_id": "aws.ec2.security_group.unused",
+      "resource_type": "aws.ec2.security_group",
+      "resource_id": "sg-0cad06c1c977d2f02",
+      "region": "ap-south-1",
+      "title": "Unused security group review candidate",
+      "summary": "Security group 'launch-wizard-1' (sg-0cad06c1c977d2f02) in VPC vpc-048635257d2d29ff3 has no current ENI associations; review as cleanup candidate",
+      "reason": "Security group has normalized attachment_eni_count == 0 and the default-group exclusion did not match",
+      "risk": "low",
+      "confidence": "medium",
+      "detected_at": "2026-09-06T07:41:33.761250+00:00",
+      "details": {
+        "evaluation_path": "unused-security-group-review-candidate",
+        "sg_id": "sg-0cad06c1c977d2f02",
+        "sg_name": "launch-wizard-1",
+        "vpc_id": "vpc-048635257d2d29ff3",
+        "attached_eni_count": 0,
+        "referenced_by_other_sg": false,
+        "rule_count": 5,
+        "description": "launch-wizard-1 created 2026-02-24T09:50:22.161Z",
+        "is_default_group": false,
+        "region_scope_only": true
+      },
+      "evidence": {
+        "signals_used": [
+          "No ENI associations found (attached_eni_count == 0) for sg-0cad06c1c977d2f02",
+          "is_default_group == False \u2014 default-group exclusion did not match",
+          "referenced_by_other_sg == False; cross-SG references are dependency metadata only, not ENI attachment",
+          "5 rule(s) defined (ingress + egress)",
+          "VPC: vpc-048635257d2d29ff3"
+        ],
+        "signals_not_checked": [
+          "Launch templates, Auto Scaling, ECS, Lambda, and similar configurations not currently materialized as ENIs",
+          "Security group VPC associations (not queried by this rule)",
+          "Business/application or DR intent not known",
+          "EC2 eventual-consistency windows after recent SG or ENI changes",
+          "AWS control-plane dependencies not visible in DescribeNetworkInterfaces for this region"
+        ],
+        "time_window": null
+      },
+      "estimated_monthly_cost_usd": null,
+      "account_id": null,
+      "account_name": null
+    },
+    {
+      "provider": "aws",
+      "rule_id": "aws.ec2.security_group.unused",
+      "resource_type": "aws.ec2.security_group",
+      "resource_id": "sg-08b5e079e733682b7",
+      "region": "ap-south-1",
+      "title": "Unused security group review candidate",
+      "summary": "Security group 'launch-wizard-2' (sg-08b5e079e733682b7) in VPC vpc-048635257d2d29ff3 has no current ENI associations; review as cleanup candidate",
+      "reason": "Security group has normalized attachment_eni_count == 0 and the default-group exclusion did not match",
+      "risk": "low",
+      "confidence": "medium",
+      "detected_at": "2026-09-06T07:41:33.761250+00:00",
+      "details": {
+        "evaluation_path": "unused-security-group-review-candidate",
+        "sg_id": "sg-08b5e079e733682b7",
+        "sg_name": "launch-wizard-2",
+        "vpc_id": "vpc-048635257d2d29ff3",
+        "attached_eni_count": 0,
+        "referenced_by_other_sg": false,
+        "rule_count": 5,
+        "description": "launch-wizard-2 created 2026-02-26T06:15:30.998Z",
+        "is_default_group": false,
+        "region_scope_only": true
+      },
+      "evidence": {
+        "signals_used": [
+          "No ENI associations found (attached_eni_count == 0) for sg-08b5e079e733682b7",
+          "is_default_group == False \u2014 default-group exclusion did not match",
+          "referenced_by_other_sg == False; cross-SG references are dependency metadata only, not ENI attachment",
+          "5 rule(s) defined (ingress + egress)",
+          "VPC: vpc-048635257d2d29ff3"
+        ],
+        "signals_not_checked": [
+          "Launch templates, Auto Scaling, ECS, Lambda, and similar configurations not currently materialized as ENIs",
+          "Security group VPC associations (not queried by this rule)",
+          "Business/application or DR intent not known",
+          "EC2 eventual-consistency windows after recent SG or ENI changes",
+          "AWS control-plane dependencies not visible in DescribeNetworkInterfaces for this region"
+        ],
+        "time_window": null
+      },
+      "estimated_monthly_cost_usd": null,
+      "account_id": null,
+      "account_name": null
+    },
+    {
+      "provider": "aws",
+      "rule_id": "aws.ec2.security_group.unused",
+      "resource_type": "aws.ec2.security_group",
+      "resource_id": "sg-030176a08918de328",
+      "region": "ap-south-1",
+      "title": "Unused security group review candidate",
+      "summary": "Security group 'launch-wizard-3' (sg-030176a08918de328) in VPC vpc-048635257d2d29ff3 has no current ENI associations; review as cleanup candidate",
+      "reason": "Security group has normalized attachment_eni_count == 0 and the default-group exclusion did not match",
+      "risk": "low",
+      "confidence": "medium",
+      "detected_at": "2026-09-06T07:41:33.761250+00:00",
+      "details": {
+        "evaluation_path": "unused-security-group-review-candidate",
+        "sg_id": "sg-030176a08918de328",
+        "sg_name": "launch-wizard-3",
+        "vpc_id": "vpc-048635257d2d29ff3",
+        "attached_eni_count": 0,
+        "referenced_by_other_sg": false,
+        "rule_count": 2,
+        "description": "launch-wizard-3 created 2026-08-31T12:27:43.009Z",
+        "is_default_group": false,
+        "region_scope_only": true
+      },
+      "evidence": {
+        "signals_used": [
+          "No ENI associations found (attached_eni_count == 0) for sg-030176a08918de328",
+          "is_default_group == False \u2014 default-group exclusion did not match",
+          "referenced_by_other_sg == False; cross-SG references are dependency metadata only, not ENI attachment",
+          "2 rule(s) defined (ingress + egress)",
+          "VPC: vpc-048635257d2d29ff3"
+        ],
+        "signals_not_checked": [
+          "Launch templates, Auto Scaling, ECS, Lambda, and similar configurations not currently materialized as ENIs",
+          "Security group VPC associations (not queried by this rule)",
+          "Business/application or DR intent not known",
+          "EC2 eventual-consistency windows after recent SG or ENI changes",
+          "AWS control-plane dependencies not visible in DescribeNetworkInterfaces for this region"
+        ],
+        "time_window": null
+      },
+      "estimated_monthly_cost_usd": null,
+      "account_id": null,
+      "account_name": null
+    },
+    {
+      "provider": "aws",
+      "rule_id": "aws.resource.untagged",
+      "resource_type": "aws.s3.bucket",
+      "resource_id": "viren-client-onboarding-tf-state",
+      "region": "ap-south-1",
+      "title": "Untagged S3 bucket",
+      "summary": "viren-client-onboarding-tf-state has no current tags",
+      "reason": "No current tags found in authoritative tag source",
+      "risk": "medium",
+      "confidence": "high",
+      "detected_at": "2026-09-06T07:41:30.842763+00:00",
+      "details": {
+        "evaluation_path": "untagged-supported-resource",
+        "resource_family": "s3_bucket",
+        "resource_id": "viren-client-onboarding-tf-state",
+        "current_tag_count": 0,
+        "native_region": null,
+        "resource_arn": "arn:aws:s3:::viren-client-onboarding-tf-state",
+        "create_time": "2026-08-01T13:19:07+00:00",
+        "age_days": 35,
+        "tag_source_api": "s3:GetBucketTagging"
+      },
+      "evidence": {
+        "signals_used": [
+          "s3_bucket resource identified in supported canonical scope",
+          "Authoritative current-tag source (s3:GetBucketTagging) was consulted",
+          "No current tags were present at evaluation time"
+        ],
+        "signals_not_checked": [
+          "Whether the resource is intentionally exempt from tagging",
+          "Whether specific required business tags should exist",
+          "Whether the effective AWS Organizations tag policy marks the resource compliant",
+          "Application/service criticality",
+          "Planned future usage",
+          "Exact cost impact"
+        ],
+        "time_window": null
+      },
+      "estimated_monthly_cost_usd": null,
+      "account_id": null,
+      "account_name": null
+    },
+    {
+      "provider": "aws",
+      "rule_id": "aws.ec2.security_group.unused",
+      "resource_type": "aws.ec2.security_group",
+      "resource_id": "sg-008c85a3253e8d5e1",
+      "region": "us-east-1",
+      "title": "Unused security group review candidate",
+      "summary": "Security group 'gava-dev-alb-sg' (sg-008c85a3253e8d5e1) in VPC vpc-084093e2488671630 has no current ENI associations; review as cleanup candidate",
+      "reason": "Security group has normalized attachment_eni_count == 0 and the default-group exclusion did not match",
+      "risk": "low",
+      "confidence": "medium",
+      "detected_at": "2026-09-06T07:41:36.787983+00:00",
+      "details": {
+        "evaluation_path": "unused-security-group-review-candidate",
+        "sg_id": "sg-008c85a3253e8d5e1",
+        "sg_name": "gava-dev-alb-sg",
+        "vpc_id": "vpc-084093e2488671630",
+        "attached_eni_count": 0,
+        "referenced_by_other_sg": false,
+        "rule_count": 3,
+        "description": "ALB Security Group",
+        "is_default_group": false,
+        "region_scope_only": true,
+        "tags": {
+          "Environment": "dev",
+          "Project": "Client-Onboarding",
+          "Name": "gava-dev-alb-sg",
+          "Client": "gava",
+          "ManagedBy": "Terraform"
+        }
+      },
+      "evidence": {
+        "signals_used": [
+          "No ENI associations found (attached_eni_count == 0) for sg-008c85a3253e8d5e1",
+          "is_default_group == False \u2014 default-group exclusion did not match",
+          "referenced_by_other_sg == False; cross-SG references are dependency metadata only, not ENI attachment",
+          "3 rule(s) defined (ingress + egress)",
+          "VPC: vpc-084093e2488671630"
+        ],
+        "signals_not_checked": [
+          "Launch templates, Auto Scaling, ECS, Lambda, and similar configurations not currently materialized as ENIs",
+          "Security group VPC associations (not queried by this rule)",
+          "Business/application or DR intent not known",
+          "EC2 eventual-consistency windows after recent SG or ENI changes",
+          "AWS control-plane dependencies not visible in DescribeNetworkInterfaces for this region"
+        ],
+        "time_window": null
+      },
+      "estimated_monthly_cost_usd": null,
+      "account_id": null,
+      "account_name": null
+    },
+    {
+      "provider": "aws",
+      "rule_id": "aws.ec2.security_group.unused",
+      "resource_type": "aws.ec2.security_group",
+      "resource_id": "sg-070424f98e63642e0",
+      "region": "us-east-1",
+      "title": "Unused security group review candidate",
+      "summary": "Security group 'gava-dev-ec2-sg' (sg-070424f98e63642e0) in VPC vpc-084093e2488671630 has no current ENI associations; review as cleanup candidate",
+      "reason": "Security group has normalized attachment_eni_count == 0 and the default-group exclusion did not match",
+      "risk": "low",
+      "confidence": "medium",
+      "detected_at": "2026-09-06T07:41:36.787983+00:00",
+      "details": {
+        "evaluation_path": "unused-security-group-review-candidate",
+        "sg_id": "sg-070424f98e63642e0",
+        "sg_name": "gava-dev-ec2-sg",
+        "vpc_id": "vpc-084093e2488671630",
+        "attached_eni_count": 0,
+        "referenced_by_other_sg": true,
+        "rule_count": 3,
+        "description": "EC2 Security Group",
+        "is_default_group": false,
+        "region_scope_only": true,
+        "tags": {
+          "Project": "Client-Onboarding",
+          "Environment": "dev",
+          "ManagedBy": "Terraform",
+          "Name": "gava-dev-ec2-sg",
+          "Client": "gava"
+        }
+      },
+      "evidence": {
+        "signals_used": [
+          "No ENI associations found (attached_eni_count == 0) for sg-070424f98e63642e0",
+          "is_default_group == False \u2014 default-group exclusion did not match",
+          "referenced_by_other_sg == True; cross-SG references are dependency metadata only, not ENI attachment",
+          "3 rule(s) defined (ingress + egress)",
+          "VPC: vpc-084093e2488671630"
+        ],
+        "signals_not_checked": [
+          "Launch templates, Auto Scaling, ECS, Lambda, and similar configurations not currently materialized as ENIs",
+          "Security group VPC associations (not queried by this rule)",
+          "Business/application or DR intent not known",
+          "EC2 eventual-consistency windows after recent SG or ENI changes",
+          "AWS control-plane dependencies not visible in DescribeNetworkInterfaces for this region"
+        ],
+        "time_window": null
+      },
+      "estimated_monthly_cost_usd": null,
+      "account_id": null,
+      "account_name": null
+    },
+    {
+      "provider": "aws",
+      "rule_id": "aws.ec2.security_group.unused",
+      "resource_type": "aws.ec2.security_group",
+      "resource_id": "sg-01db5c2cfebdc6821",
+      "region": "us-east-1",
+      "title": "Unused security group review candidate",
+      "summary": "Security group 'gava-dev-rds-sg' (sg-01db5c2cfebdc6821) in VPC vpc-084093e2488671630 has no current ENI associations; review as cleanup candidate",
+      "reason": "Security group has normalized attachment_eni_count == 0 and the default-group exclusion did not match",
+      "risk": "low",
+      "confidence": "medium",
+      "detected_at": "2026-09-06T07:41:36.787983+00:00",
+      "details": {
+        "evaluation_path": "unused-security-group-review-candidate",
+        "sg_id": "sg-01db5c2cfebdc6821",
+        "sg_name": "gava-dev-rds-sg",
+        "vpc_id": "vpc-084093e2488671630",
+        "attached_eni_count": 0,
+        "referenced_by_other_sg": false,
+        "rule_count": 2,
+        "description": "RDS Security Group",
+        "is_default_group": false,
+        "region_scope_only": true,
+        "tags": {
+          "Name": "gava-dev-rds-sg",
+          "Project": "Client-Onboarding",
+          "Environment": "dev",
+          "ManagedBy": "Terraform",
+          "Client": "gava"
+        }
+      },
+      "evidence": {
+        "signals_used": [
+          "No ENI associations found (attached_eni_count == 0) for sg-01db5c2cfebdc6821",
+          "is_default_group == False \u2014 default-group exclusion did not match",
+          "referenced_by_other_sg == False; cross-SG references are dependency metadata only, not ENI attachment",
+          "2 rule(s) defined (ingress + egress)",
+          "VPC: vpc-084093e2488671630"
+        ],
+        "signals_not_checked": [
+          "Launch templates, Auto Scaling, ECS, Lambda, and similar configurations not currently materialized as ENIs",
+          "Security group VPC associations (not queried by this rule)",
+          "Business/application or DR intent not known",
+          "EC2 eventual-consistency windows after recent SG or ENI changes",
+          "AWS control-plane dependencies not visible in DescribeNetworkInterfaces for this region"
+        ],
+        "time_window": null
+      },
+      "estimated_monthly_cost_usd": null,
+      "account_id": null,
+      "account_name": null
+    },
+    {
+      "provider": "aws",
+      "rule_id": "aws.resource.untagged",
+      "resource_type": "aws.s3.bucket",
+      "resource_id": "viren-client-onboarding-tf-state",
+      "region": "us-east-1",
+      "title": "Untagged S3 bucket",
+      "summary": "viren-client-onboarding-tf-state has no current tags",
+      "reason": "No current tags found in authoritative tag source",
+      "risk": "medium",
+      "confidence": "high",
+      "detected_at": "2026-09-06T07:41:31.672671+00:00",
+      "details": {
+        "evaluation_path": "untagged-supported-resource",
+        "resource_family": "s3_bucket",
+        "resource_id": "viren-client-onboarding-tf-state",
+        "current_tag_count": 0,
+        "native_region": null,
+        "resource_arn": "arn:aws:s3:::viren-client-onboarding-tf-state",
+        "create_time": "2026-08-01T13:19:05+00:00",
+        "age_days": 35,
+        "tag_source_api": "s3:GetBucketTagging"
+      },
+      "evidence": {
+        "signals_used": [
+          "s3_bucket resource identified in supported canonical scope",
+          "Authoritative current-tag source (s3:GetBucketTagging) was consulted",
+          "No current tags were present at evaluation time"
+        ],
+        "signals_not_checked": [
+          "Whether the resource is intentionally exempt from tagging",
+          "Whether specific required business tags should exist",
+          "Whether the effective AWS Organizations tag policy marks the resource compliant",
+          "Application/service criticality",
+          "Planned future usage",
+          "Exact cost impact"
+        ],
+        "time_window": null
+      },
+      "estimated_monthly_cost_usd": null,
+      "account_id": null,
+      "account_name": null
+    }
+  ],
+  "suppressed": []
+}
